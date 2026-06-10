@@ -14,8 +14,8 @@ id: goga-tool-scriba-validation
 
 consumes:
   - source.cell
-  - source.document
-  - synthesized_document
+  - source.documents
+  - synthesized_documents
 
 produces:
   - validation
@@ -26,10 +26,7 @@ produces:
 - Semantic Audit
 - Terminology Audit
 - AI Readability Audit
-
-## Linting
-- Run bash command `goga lint` without arguments for all cells validation
-- Fix lint errors
+- Formatting Integrity Audit 
 
 ## Output
 validation report

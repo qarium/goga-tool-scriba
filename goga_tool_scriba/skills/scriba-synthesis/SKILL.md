@@ -19,7 +19,7 @@ consumes:
   - enriched_context
 
 produces:
-  - synthesized_document
+  - synthesized_documents
 ```
 
 ## Decision Matrix
@@ -34,4 +34,4 @@ AI Clarity -> AI Variant
 - Preserve instruction priority.
 
 ## Output
-synthesized_document
+synthesized_documents

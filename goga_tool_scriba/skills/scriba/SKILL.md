@@ -14,7 +14,7 @@ Detect automatically:
 - Language of source. Save to `$SOURCE_LANG`.
 
 Ask user:
-- Cell or document path for translation. Save to `$DOCUMENT_PATH` or `$CELL_PATH` by type.
+- Cell or documents path for translation. Save to `$DOCUMENTS_PATH` or `$CELL_PATH` by type.
 - Translation language. Save to `$TARGET_LANG`.
 
 For the cell, translate the files only:
@@ -33,7 +33,8 @@ execution_policy:
 pipeline_context:
     source:
         cell: $CELL_PATH
-        document: $DOCUMENT_PATH
+        documents:
+          - $DOCUMENTS_PATH
         language:
             source: $SOURCE_LANG
             target: $TARGET_LANG
@@ -47,8 +48,10 @@ pipeline_context:
         ai: {}
 
     enriched_context: {}
-    synthesized_document: {}
+    synthesized_documents: {}
     validation: {}
+    translated_files: []
+    lint_status: {}
 ```
 
 ## Translation invariants
@@ -80,6 +83,8 @@ forbidden_operations:
 4. goga-tool-scriba-context
 5. goga-tool-scriba-synthesis
 6. goga-tool-scriba-validation
+7. goga-tool-scriba-save-results
+8. goga-tool-scriba-finalize
 
 ## Skill Logic
 
@@ -92,6 +97,8 @@ Execute skills sequentially and update pipeline_context after each successful ex
 - Context Gate
 - Synthesis Gate
 - Validation Gate
+- Save Results Gate
+- Finalize Pipeline Gate
 
 ## Failure Policy
 stop_on_error: true

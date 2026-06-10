@@ -18,7 +18,7 @@ id: goga-tool-scriba-terminology
 
 consumes:
   - source.cell
-  - source.document
+  - source.documents
 
 produces:
   - glossary

@@ -18,7 +18,7 @@ id: goga-tool-scriba-semantic
 
 consumes:
   - source.cell
-  - source.document
+  - source.documents
   - glossary
 
 produces:
