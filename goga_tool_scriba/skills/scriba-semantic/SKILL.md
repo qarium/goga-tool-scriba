@@ -17,7 +17,6 @@ Build semantic model without translating content.
 id: goga-tool-scriba-semantic
 
 consumes:
-  - source.cell
   - source.documents
   - glossary
 

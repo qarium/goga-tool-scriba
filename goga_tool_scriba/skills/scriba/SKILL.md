@@ -14,11 +14,11 @@ Detect automatically:
 - Language of source. Save to `$SOURCE_LANG`.
 
 Ask user:
-- Cell or documents path for translation. Save to `$DOCUMENTS_PATH` or `$CELL_PATH` by type.
+- Cell or documents path for translation. Save to `$DOCUMENT_PATHS`.
 - Translation language. Save to `$TARGET_LANG`.
 
-For the cell, translate the files only:
-- `CODEMANIFEST` (Annotations and inline usages only)
+For the cell — extract files for translation and save to `$DOCUMENT_PATHS`, strictly:
+- `<cell_name>/CODEMANIFEST` (Annotations and inline usages only)
 - `<cell_name>/.usages/*.md`
 
 ## Objective
@@ -32,9 +32,8 @@ execution_policy:
 
 pipeline_context:
     source:
-        cell: $CELL_PATH
         documents:
-          - $DOCUMENTS_PATH
+          - $DOCUMENT_PATHS
         language:
             source: $SOURCE_LANG
             target: $TARGET_LANG

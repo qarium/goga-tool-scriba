@@ -13,7 +13,6 @@ Save results from synthesized documents to files.
 id: goga-tool-scriba-save-results
 
 consumes:
-  - source.cells
   - source.documents
   - synthesized_documents
 

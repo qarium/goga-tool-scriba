@@ -17,7 +17,6 @@ Build canonical glossary and detect terminology drift.
 id: goga-tool-scriba-terminology
 
 consumes:
-  - source.cell
   - source.documents
 
 produces:

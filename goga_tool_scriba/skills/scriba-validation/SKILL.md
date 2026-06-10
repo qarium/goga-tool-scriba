@@ -13,7 +13,6 @@ Independent quality audit.
 id: goga-tool-scriba-validation
 
 consumes:
-  - source.cell
   - source.documents
   - synthesized_documents
 
