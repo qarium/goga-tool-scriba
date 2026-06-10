@@ -8,6 +8,20 @@ description: Goga tool skill — produces the final synthesized translation by s
 ## Objective
 Produce final translation.
 
+## Manifest
+```yaml
+id: goga-tool-scriba-synthesis
+
+consumes:
+  - glossary
+  - semantic_model
+  - translation_variants
+  - enriched_context
+
+produces:
+  - synthesized_document
+```
+
 ## Decision Matrix
 Semantics -> Literal
 Terminology -> Glossary

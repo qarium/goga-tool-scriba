@@ -12,6 +12,10 @@ Translation Coordinator
 ```yaml
 id: goga-tool-scriba-generation
 
+consumes:
+  - glossary
+  - semantic_model
+
 workflow:
   - call_skill: goga-tool-scriba-generation-literal
   - call_skill: goga-tool-scriba-generation-technical
