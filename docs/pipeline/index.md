@@ -1,101 +1,48 @@
-# Translation Pipeline
+# Translation
 
-The `goga-tool-scriba` skill orchestrates a complete translation pipeline for cells and standalone documents.
+The translation pipeline converts technical texts — cells (CodeManifests, usage files) and standalone documents — from one language to another while preserving structure, semantics, and requirements.
 
-## Execution Model
+The pipeline detects the source language automatically. You provide the target cell or document path and the target language.
 
-The pipeline runs stages sequentially, updating a shared `pipeline_context` after each successful execution.
+## How it works
 
-```yaml
-execution_policy:
-  stop_on_error: true
-  max_retries: 2
-  shared_context_required: true
-```
+The pipeline runs six stages in sequence. Each stage builds on the results of the previous one.
 
-## Shared Context
+### 1. Terminology
 
-All stages read from and write to a shared context:
+Extracts technical terms, entities, and aliases from the source. Builds a canonical glossary that all subsequent stages use for consistency.
 
-```yaml
-pipeline_context:
-    source:
-        cell: $CELL_PATH
-        document: $DOCUMENT_PATH
-        language:
-            source: $SOURCE_LANG
-            target: $TARGET_LANG
+### 2. Semantic Model
 
-    glossary: {}
-    semantic_model: {}
+Analyzes the source structure — sections, entities, actors, actions, constraints, and workflows — without translating. This model guides the generation stage.
 
-    translation_variants:
-        literal: {}
-        technical: {}
-        ai: {}
+### 3. Generation
 
-    enriched_context: {}
-    synthesized_document: {}
-    validation: {}
-```
+Produces three independent translation variants:
 
-## Stage Order
+- **Literal** — closest to the original, maximum semantic preservation
+- **Technical** — architecture-grade language with active voice and industry terminology
+- **AI-optimized** — explicit subjects, entities, and actions for LLM consumers
 
-1. [Terminology](terminology.md) — canonical glossary extraction
-2. [Semantic Model](semantic.md) — semantic structure extraction
-3. [Generation](generation.md) — multi-variant translation (literal, technical, AI)
-4. [Context Enrichment](context.md) — unified context merging
-5. [Synthesis](synthesis.md) — best-variant selection per segment
-6. [Validation](validation.md) — independent quality audit
+### 4. Context Enrichment
 
-## Execution Gates
+Merges the glossary, semantic model, and all three variants into a unified context — no new information is added.
 
-Each stage has an execution gate that must pass before the next stage begins:
+### 5. Synthesis
 
-- Terminology Gate
-- Semantic Gate
-- Translation Gate
-- Context Gate
-- Synthesis Gate
-- Validation Gate
+Selects the best variant for each segment using a priority matrix: semantics first, then terminology accuracy, then readability, then AI clarity.
 
-## Failure Policy
+### 6. Validation
 
-```yaml
-stop_on_error: true
-max_retries: 2
-```
+Runs an independent quality audit covering structure integrity, semantic fidelity, terminology consistency, and AI readability. The pipeline retries on failure up to 2 times.
 
-The pipeline stops on the first error and retries up to 2 times before failing.
+## What stays unchanged
 
-## Translation Invariants
+Throughout all stages, the pipeline guarantees:
 
-The pipeline enforces these invariants throughout all stages:
+- Document structure
+- Section and algorithm order
+- Requirements and constraints
+- Instruction priority
 
-| Invariant | Description |
-|-----------|-------------|
-| `preserve_document_structure` | Document structure remains unchanged |
-| `preserve_section_order` | Section ordering is maintained |
-| `preserve_list_order` | List ordering is maintained |
-| `preserve_algorithm_order` | Algorithm step ordering is maintained |
-| `preserve_requirements` | All requirements are retained |
-| `preserve_constraints` | All constraints are retained |
-| `preserve_prompt_logic` | Prompt logic is unchanged |
-| `preserve_instruction_priority` | Instruction priority is maintained |
-
-### Forbidden operations
-
-- Reorder sections
-- Reorder steps
-- Merge steps
-- Split steps
-- Remove requirements
-- Add requirements
-- Infer new logic
-
-## Output
-
-The pipeline produces:
-
-- **`final_translation`** — the synthesized translation document
-- **`validation_report`** — quality audit with PASS or FAIL verdict
+For cells, only annotations and usage files are translated — the contract structure remains untouched.

@@ -44,15 +44,4 @@ nav:
   - Home: index.md
   - Installation: installation.md
   - Quick Start: quick-start.md
-  - Pipeline:
-    - Overview: pipeline/index.md
-    - Terminology: pipeline/terminology.md
-    - Semantic Model: pipeline/semantic.md
-    - Generation:
-      - Coordinator: pipeline/generation.md
-      - Literal Variant: pipeline/generation-literal.md
-      - Technical Variant: pipeline/generation-technical.md
-      - AI Variant: pipeline/generation-ai.md
-    - Context Enrichment: pipeline/context.md
-    - Synthesis: pipeline/synthesis.md
-    - Validation: pipeline/validation.md
+  - Translation: pipeline/index.md
