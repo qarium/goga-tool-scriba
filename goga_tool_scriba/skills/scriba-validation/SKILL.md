@@ -28,7 +28,7 @@ produces:
 - AI Readability Audit
 
 ## Linting
-- Run bash command `goga lint` for cell validation
+- Run bash command `goga lint` for all cells validation
 - Fix lint errors
 
 ## Output
