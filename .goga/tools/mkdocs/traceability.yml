@@ -1,0 +1,29 @@
+docs/pipeline/index.md:
+  - goga_tool_scriba/skills/scriba
+
+docs/pipeline/terminology.md:
+  - goga_tool_scriba/skills/scriba-terminology
+
+docs/pipeline/semantic.md:
+  - goga_tool_scriba/skills/scriba-semantic
+
+docs/pipeline/generation.md:
+  - goga_tool_scriba/skills/scriba-generation
+
+docs/pipeline/generation-literal.md:
+  - goga_tool_scriba/skills/scriba-generation-literal
+
+docs/pipeline/generation-technical.md:
+  - goga_tool_scriba/skills/scriba-generation-technical
+
+docs/pipeline/generation-ai.md:
+  - goga_tool_scriba/skills/scriba-generation-ai
+
+docs/pipeline/context.md:
+  - goga_tool_scriba/skills/scriba-context
+
+docs/pipeline/synthesis.md:
+  - goga_tool_scriba/skills/scriba-synthesis
+
+docs/pipeline/validation.md:
+  - goga_tool_scriba/skills/scriba-validation

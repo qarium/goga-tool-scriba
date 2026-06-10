@@ -1,0 +1,58 @@
+site_name: goga-tool-scriba
+site_description: "Goga tool for translating technical texts — processing cells and documents while preserving structure, semantics, and requirements."
+site_url: "https://qarium.github.io/goga-tool-scriba/"
+repo_url: "https://github.com/qarium/goga-tool-scriba"
+repo_name: qarium/goga-tool-scriba
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  logo: https://avatars.githubusercontent.com/u/262344922?s=200&v=4
+  palette:
+    - scheme: default
+      primary: custom
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+        media: "(prefers-color-scheme: light)"
+    - scheme: slate
+      primary: custom
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+        media: "(prefers-color-scheme: dark)"
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Quick Start: quick-start.md
+  - Pipeline:
+    - Overview: pipeline/index.md
+    - Terminology: pipeline/terminology.md
+    - Semantic Model: pipeline/semantic.md
+    - Generation:
+      - Coordinator: pipeline/generation.md
+      - Literal Variant: pipeline/generation-literal.md
+      - Technical Variant: pipeline/generation-technical.md
+      - AI Variant: pipeline/generation-ai.md
+    - Context Enrichment: pipeline/context.md
+    - Synthesis: pipeline/synthesis.md
+    - Validation: pipeline/validation.md
