@@ -2,6 +2,8 @@
 
 Goga tool for working with technical texts — processing cells (CodeManifests, usage files) and standalone documents while preserving structure, semantics, and requirements.
 
+**Documentation:** [qarium.github.io/goga-tool-scriba](https://qarium.github.io/goga-tool-scriba/)
+
 ## Installation
 
 ```bash
