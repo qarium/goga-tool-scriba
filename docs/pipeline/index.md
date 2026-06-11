@@ -36,13 +36,13 @@ Selects the best variant for each segment using a priority matrix: semantics fir
 
 Runs an independent quality audit covering structure integrity, semantic fidelity, terminology consistency, AI readability, and formatting integrity. The pipeline retries on failure up to 2 times.
 
-### 7. Save Results
+### 7. Apply Results
 
-Writes synthesized documents to files at the paths defined in the cell manifest.
+Applies synthesized documents to files at the paths defined in the cell manifest.
 
 ### 8. Finalize
 
-Runs linting across all cells, fixes errors, and produces a human-readable report summarizing the entire pipeline output — languages, glossary, semantic model, validation results, and translated files.
+Runs linting across all cells, fixes errors, and produces a human-readable report summarizing the entire pipeline output — languages, glossary, semantic model, validation results, translated files, and final status.
 
 ## What stays unchanged
 

@@ -9,5 +9,5 @@ docs/pipeline/index.md:
   - goga_tool_scriba/skills/scriba-context
   - goga_tool_scriba/skills/scriba-synthesis
   - goga_tool_scriba/skills/scriba-validation
-  - goga_tool_scriba/skills/scriba-save-results
+  - goga_tool_scriba/skills/scriba-apply-results
   - goga_tool_scriba/skills/scriba-finalize
