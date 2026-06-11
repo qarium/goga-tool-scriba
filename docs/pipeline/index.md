@@ -6,7 +6,7 @@ The pipeline detects the source language automatically. You provide the target c
 
 ## How it works
 
-The pipeline runs six stages in sequence. Each stage builds on the results of the previous one.
+The pipeline runs eight stages in sequence. Each stage builds on the results of the previous one.
 
 ### 1. Terminology
 
@@ -34,7 +34,15 @@ Selects the best variant for each segment using a priority matrix: semantics fir
 
 ### 6. Validation
 
-Runs an independent quality audit covering structure integrity, semantic fidelity, terminology consistency, and AI readability. The pipeline retries on failure up to 2 times.
+Runs an independent quality audit covering structure integrity, semantic fidelity, terminology consistency, AI readability, and formatting integrity. The pipeline retries on failure up to 2 times.
+
+### 7. Save Results
+
+Writes synthesized documents to files at the paths defined in the cell manifest.
+
+### 8. Finalize
+
+Runs linting across all cells, fixes errors, and produces a human-readable report summarizing the entire pipeline output — languages, glossary, semantic model, validation results, and translated files.
 
 ## What stays unchanged
 
