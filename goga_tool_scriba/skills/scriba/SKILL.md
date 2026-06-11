@@ -3,7 +3,7 @@ name: goga-tool-scriba
 description: Goga tool skill — orchestrates the complete translation pipeline for cells and documents. Invoked from Goga tool to translate CodeManifests and usage files across languages with terminology analysis, semantic modeling, multi-variant generation, context enrichment, synthesis, and validation.
 ---
 
-# translation
+# Translation
 
 ## System Role
 Translation Pipeline Orchestrator
@@ -50,7 +50,7 @@ pipeline_context:
     synthesized_documents: {}
     validation: {}
     translated_files: []
-    lint_status: {}
+    finish_status: {}
 ```
 
 ## Translation invariants
@@ -82,7 +82,7 @@ forbidden_operations:
 4. goga-tool-scriba-context
 5. goga-tool-scriba-synthesis
 6. goga-tool-scriba-validation
-7. goga-tool-scriba-save-results
+7. goga-tool-scriba-apply-results
 8. goga-tool-scriba-finalize
 
 ## Skill Logic
@@ -104,5 +104,4 @@ stop_on_error: true
 max_retries: 2
 
 ## Output
-final_translation
-validation_report
+status

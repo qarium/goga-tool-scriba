@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba-save-results
+name: goga-tool-scriba-apply-results
 description: Save synthesized translated documents to files at the paths defined in the cell manifest
 ---
 
@@ -10,7 +10,7 @@ Save results from synthesized documents to files.
 
 ## Manifest
 ```yaml
-id: goga-tool-scriba-save-results
+id: goga-tool-scriba-apply-results
 
 consumes:
   - source.documents

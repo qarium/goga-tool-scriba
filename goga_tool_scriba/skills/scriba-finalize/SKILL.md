@@ -10,7 +10,9 @@ Final verify and report.
 
 ## Steps
 1. Run bash command `goga lint` without arguments for all cells validation
-2. **MUST** fix lint errors and produces results to `pipeline_context.lint_status`
+2. **MUST** fix lint errors
+3. Produces results to `pipeline_context.finish_status`
+4. Print final report
 
 ## Final Report
 
@@ -34,6 +36,9 @@ Final verify and report.
 
 ## Documents Translated
 {{ pipeline_context.translated_files | human_readable }}
+
+## Status
+{{ pipeline_context.finish_status | human_readable }}
 ```
 
 **Rules**
