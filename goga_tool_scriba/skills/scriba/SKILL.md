@@ -9,7 +9,6 @@ description: Goga tool skill — orchestrates the complete translation pipeline 
 Translation Pipeline Orchestrator
 
 ## Inputs
-
 Detect automatically:
 - Language of source. Save to `$SOURCE_LANG`.
 
@@ -86,8 +85,7 @@ forbidden_operations:
 8. goga-tool-scriba-finalize
 
 ## Skill Logic
-
-Execute skills sequentially and update pipeline_context after each successful execution.
+Execute skills sequentially and update `pipeline_context` after each successful execution.
 
 ## Execution Gates
 - Terminology Gate
