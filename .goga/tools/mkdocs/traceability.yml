@@ -1,13 +1,27 @@
 docs/pipeline/index.md:
   - goga_tool_scriba/skills/scriba
-  - goga_tool_scriba/skills/scriba-terminology
-  - goga_tool_scriba/skills/scriba-semantic
-  - goga_tool_scriba/skills/scriba-generation
-  - goga_tool_scriba/skills/scriba-generation-literal
-  - goga_tool_scriba/skills/scriba-generation-technical
-  - goga_tool_scriba/skills/scriba-generation-ai
-  - goga_tool_scriba/skills/scriba-context
-  - goga_tool_scriba/skills/scriba-synthesis
-  - goga_tool_scriba/skills/scriba-validation
-  - goga_tool_scriba/skills/scriba-apply-results
-  - goga_tool_scriba/skills/scriba-finalize
+  - goga_tool_scriba/skills/scriba-trans
+  - goga_tool_scriba/skills/scriba-trans-terminology
+  - goga_tool_scriba/skills/scriba-trans-semantic
+  - goga_tool_scriba/skills/scriba-trans-generation
+  - goga_tool_scriba/skills/scriba-trans-generation-literal
+  - goga_tool_scriba/skills/scriba-trans-generation-technical
+  - goga_tool_scriba/skills/scriba-trans-generation-ai
+  - goga_tool_scriba/skills/scriba-trans-context
+  - goga_tool_scriba/skills/scriba-trans-synthesis
+  - goga_tool_scriba/skills/scriba-trans-validation
+  - goga_tool_scriba/skills/scriba-trans-apply-results
+  - goga_tool_scriba/skills/scriba-trans-finalize
+docs/review/index.md:
+  - goga_tool_scriba/skills/scriba
+  - goga_tool_scriba/skills/scribe-review
+  - goga_tool_scriba/skills/scribe-review-structure-syntax-check
+  - goga_tool_scriba/skills/scribe-review-prompt-framing-check
+  - goga_tool_scriba/skills/scribe-review-constraint-engineering-check
+  - goga_tool_scriba/skills/scribe-review-entropy-control-check
+  - goga_tool_scriba/skills/scribe-review-semantic-integrity-check
+  - goga_tool_scriba/skills/scribe-review-efficiency-check
+  - goga_tool_scriba/skills/scribe-review-conflict-resolution
+  - goga_tool_scriba/skills/scribe-review-planner
+  - goga_tool_scriba/skills/scribe-review-fix
+  - goga_tool_scriba/skills/scribe-review-validation
