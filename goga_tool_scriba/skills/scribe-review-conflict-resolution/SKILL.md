@@ -1,6 +1,6 @@
 ---
 name: goga-tool-scribe-review-conflict-resolution
-description:
+description: Goga tool skill — review stage that resolves conflicts between findings produced by validation skills. Applies category precedence to determine which finding takes precedence when multiple findings target the same fragment with incompatible recommendations. Consumes findings, produces resolved findings.
 ---
 
 # conflict-resolution

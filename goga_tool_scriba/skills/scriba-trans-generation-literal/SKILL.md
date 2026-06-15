@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba-generation-literal
+name: goga-tool-scriba-trans-generation-literal
 description: Goga tool skill — produces a literal translation variant with maximum semantic preservation, maintaining original structure, ordering, and requirements with minimal adaptation. Invoked from Goga tool as part of the generation stage.
 ---
 

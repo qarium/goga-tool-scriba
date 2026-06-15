@@ -1,6 +1,6 @@
 ---
 name: goga-tool-scribe-review-prompt-framing-check
-description:
+description: Goga tool skill — review stage that validates prompt framing. Detects embedding alignment, frame locking, semantic priming, and latent state persistence violations that cause frame drift or behavioral variance. Consumes documents, produces findings.
 ---
 
 # prompt-framing-check
@@ -49,36 +49,25 @@ category: prompt_framing
 ```
 
 #### Instructions
-Detect language that activates behavioral modes inconsistent with the prompt objective.
-Words and phrases influence latent-space activation and inference behavior.
+Your task is to detect the collision of incompatible behavioral modes (e.g., mixing creative/exploratory language within a deterministic/validation workflow).
 
-Report a finding when:
-- creative terminology appears in deterministic workflows;
-- brainstorming language appears in validation workflows;
-- exploratory language appears in specification workflows;
-- divergent and constrained generation signals are mixed.
+To ensure deterministic compliance, execute the analysis in exactly three steps:
 
-Pay particular attention to terms such as:
-- creative
-- brainstorm
-- imagine
-- interesting
-- innovative
-- explore
-- think freely
+**STEP 1:** Vocabulary Extraction & Counting
+Scan the entire input text and check for the presence of specific lexical markers (case-insensitive). Count and record how many indicators from each group appear in the text:
+1. [DIVERGENT_MARKERS]: "creative", "brainstorm", "imagine", "interesting", "innovative", "explore", "think freely", "out of the box", "novel".
+2. [CONSTRAINED_MARKERS]: "strict", "exact", "deterministic", "formal specification", "validate", "verify", "compliant", "precise", "rigid".
 
-Use terminology aligned with the intended execution mode.
+**STEP 2:** Workflow Classification
+Determine the dominant objective of the prompt based on its primary execution verbs and context:
+- If the prompt explicitly asks to generate ideas, brainstorm, or explore concepts -> Set WORKFLOW = EXPLORATORY.
+- If the prompt asks to write code, create specifications, validate data, verify facts, or follow strict schemas -> Set WORKFLOW = DETERMINISTIC.
 
-Examples of deterministic terminology include:
-- strict
-- exact
-- deterministic
-- formal specification
-- validate
-- verify
-- compliant
-
-Do not report findings when exploratory behavior is the explicit objective.
+**STEP 3:** Collision Validation Matrix
+Check for structural and semantic violations using the following mathematical rules:
+- Rule 1 (Mixed Signals Collision): Both [DIVERGENT_MARKERS] count >= 1 AND [CONSTRAINED_MARKERS] count >= 1. (This is a direct conflict of modes, regardless of workflow).
+- Rule 2 (Divergent Leakage): WORKFLOW == DETERMINISTIC, but [DIVERGENT_MARKERS] count >= 1. (Creative vocabulary has leaked into a strict task).
+- Rule 3 (Brainstorming in Validation): The text contains keywords like "validate" or "verify", but also contains keywords like "brainstorm" or "imagine".
 
 #### Examples
 
@@ -106,25 +95,41 @@ category: prompt_framing
 ```
 
 #### Instructions
-Detect incompatible execution frames within the same execution scope.
+Your task is to detect the collision of incompatible operational frames within the same un-demarcated scope (e.g., demanding analytical rigor and emotional entertainment simultaneously without structural boundaries).
 
-Report a finding when ALL of the following hold:
-- two or more execution frames are present;
-- at least one pair of frames belongs to incompatible categories;
-- the prompt does not explicitly separate them into distinct phases.
+To ensure deterministic compliance, execute the analysis in exactly three steps:
 
-Treat the following frame pairs as incompatible:
-- analytical ↔ entertaining
-- specification ↔ storytelling
-- deterministic ↔ brainstorming
-- validation ↔ roleplay
-- compliance ↔ creative exploration
+**STEP 1:** Frame Component Identification
+Scan the prompt and identify if elements (verbs, adjectives, requirements) trigger any of the following specific frames:
+- [ANALYTICAL]: analyze, evaluate, audit, metrics, engineering, formal, architecture.
+- [ENTERTAINING]: fun, emotional, hilarious, joke, witty, entertaining, casual.
+- [SPECIFICATION]: architecture spec, formal specification, requirements, constraints, RFC.
+- [STORYTELLING]: narrative, plot, character, story, lore, emotional arc.
+- [DETERMINISTIC]: strict, exact, zero-variance, mathematical, precise.
+- [BRAINSTORMING]: ideas, suggestions, concepts, possibilities, think freely.
+- [VALIDATION]: verify, audit, test compliance, validate fields, check errors.
+- [ROLEPLAY]: act as, pretend to be, adopt persona, impersonate.
+- [COMPLIANCE]: legal, regulatory, strict adherence, standard compliance.
+- [CREATIVE_EXPLORATION]: innovative, creative, non-standard, novel approaches.
 
-Do not report findings when ANY of the following hold:
-- the frames are executed in separate phases;
-- an explicit transition exists between the frames;
-- one frame is provided only as an example;
-- the document clearly establishes phase boundaries.
+Record all frames that have at least 1 trigger word present.
+
+**STEP 2:** Boundary & Phase Demarcation Check
+Analyze the physical structure of the prompt to see if these frames are isolated. Set BOUNDARIES = TRUE if ANY of the following structural conditions are met:
+1. The text uses explicit multi-phase headers (e.g., "Phase 1:", "Step 2:").
+2. The frames are separated into completely different blocks or code blocks.
+3. The prompt contains explicit transition phrases (e.g., "After completing the analysis, switch to...", "Then, in the next phase...").
+4. One of the conflicting frames appears strictly inside a section labeled as an Example or Quote.
+
+If none of these conditions are met, set BOUNDARIES = FALSE.
+
+**STEP 3:** Incompatibility Matrix Validation
+If BOUNDARIES == FALSE, check for the presence of any of the following exact conflicting pairs (from Step 1):
+- [ANALYTICAL] AND [ENTERTAINING]
+- [SPECIFICATION] AND [STORYTELLING]
+- [DETERMINISTIC] AND [BRAINSTORMING]
+- [VALIDATION] AND [ROLEPLAY]
+- [COMPLIANCE] AND [CREATIVE_EXPLORATION]
 
 #### Examples
 
@@ -150,23 +155,26 @@ category: prompt_framing
 ```
 
 #### Instructions
-Detect delayed establishment of execution context.
+Your task is to detect the delayed establishment of execution context (when a Role definition is placed lower in the text than the initial Task or Constraint).
 
-Report a finding when ALL of the following hold:
-- a role definition exists;
-- the role definition appears after the first task statement or behavioral constraint;
-- moving the role definition earlier would change interpretation of subsequent instructions.
+To ensure 100% deterministic evaluation, execute the analysis in exactly three steps:
 
-Role definitions include:
-- expertise declarations;
-- persona definitions;
-- authority statements;
-- execution responsibilities.
+**STEP 1:** Component & Index Mapping
+Analyze the input prompt line by line from top to bottom. Assign a 1-based index (Line 1, Line 2, etc.) to each statement and identify the following components based on specific structural markers:
+1. [ROLE_LINE]: Record the line number where a Role Definition first appears. 
+   * Markers include: expertise declarations ("expert in", "senior"), persona definitions ("You are a...", "Act as a..."), authority/responsibility statements ("Your responsibility is to...").
+   * If NO role definition exists anywhere in the text -> Set [ROLE_LINE] = NULL.
+2. [FIRST_ACTION_LINE]: Record the line number where the VERY FIRST task statement or behavioral constraint appears.
+   * Markers include: execution verbs ("Analyze", "Write", "Let's think", "Process"), formatting rules, or behavioral boundaries.
+3. [TITLE_OR_OPENING]: Check if the role definition appears in the very first sentence or within a designated Markdown header block at the very top (e.g., `# Role`, `## Context`).
+   * If yes -> Set [TITLE_OR_OPENING] = TRUE.
+   * If no -> Set [TITLE_OR_OPENING] = FALSE.
 
-Do not report findings when ANY of the following hold:
-- the role definition appears before the first task;
-- the document contains no role definition;
-- the role is established in the document title or opening section.
+**STEP 2:** Strict Positional Validation
+Compare the extracted indexes using the following strict logical rules:
+- Condition 1 (No Role): If [ROLE_LINE] == NULL -> Set VIOLATION = FALSE (No role to validate).
+- Condition 2 (Correct Order): If [ROLE_LINE] < [FIRST_ACTION_LINE] OR [TITLE_OR_OPENING] == TRUE -> Set VIOLATION = FALSE (Context established early).
+- Condition 3 (Delayed Context): If [ROLE_LINE] > [FIRST_ACTION_LINE] AND [TITLE_OR_OPENING] == FALSE -> Set VIOLATION = TRUE (The role appears chronologically later than the first task/constraint).
 
 #### Examples
 
@@ -197,25 +205,28 @@ category: prompt_framing
 ```
 
 #### Instructions
-Detect transitions between incompatible execution modes without explicit re-grounding.
+Your task is to detect when a prompt switches from one behavioral execution mode to an incompatible one without using an explicit reset or transition command ("ungrounded transition").
 
-Report a finding when ALL of the following hold:
-- execution mode A is established;
-- execution mode B is established later;
-- mode A and mode B belong to different behavioral categories;
-- no explicit transition or reset instruction exists.
+To ensure 100% deterministic compliance, execute the analysis in exactly three steps:
 
-Examples of explicit transitions:
-- End roleplay.
-- Switch to technical mode.
-- Use a formal engineering style.
-- Reset previous assumptions.
+**STEP 1:** Chronological Mode Mapping
+Analyze the input prompt line by line from top to bottom. Identify and list all behavioral execution modes present in the text in their exact chronological order of appearance. Categorize each detected mode into one of the following exact types:
+- [CREATIVE_ROLEPLAY]: Prompts involving imaginative, fictional, historical, or casual personas (e.g., "Imagine you are a medieval king", "Act as a pirate").
+- [DETERMINISTIC_ANALYSIS]: Prompts involving technical, analytical, strict, or engineering tasks (e.g., "Analyze the API specification", "Verify the code", "Audit this schema").
 
-Do not report findings when ANY of the following hold:
-- an explicit transition exists;
-- only one execution mode is present;
-- the second mode is clearly scoped as an example;
-- the document explicitly resets context.
+**STEP 2:** Transition Barrier Scan
+Scan the text intervals located strictly *between* the detected modes to check for explicit transition markers. Set TRANSITION_FOUND = TRUE if ANY of the following exact phrases or clear structural equivalents appear between Mode A and Mode B:
+1. Commands that terminate a mode (e.g., "End roleplay", "Stop simulation").
+2. Commands that explicitly switch focus (e.g., "Switch to technical mode", "Now adopt a formal style", "Change perspective to").
+3. Context reset instructions (e.g., "Reset previous assumptions", "Ignore previous persona").
+4. Strict scoping (e.g., one of the modes is wrapped inside an explicit block labeled strictly as an Example or Quote).
+
+If no such markers exist between the modes, set TRANSITION_FOUND = FALSE.
+
+**STEP 3:** State Machine Validation
+Evaluate the chronological list from Step 1 and the flag from Step 2 against the following strict violation criteria:
+- Rule 1 (Ungrounded Category Switch): The prompt establishes a [CREATIVE_ROLEPLAY] mode and later establishes a [DETERMINISTIC_ANALYSIS] mode (or vice-versa), AND TRANSITION_FOUND == FALSE.
+- Rule 2 (No Violation/Single Mode): The prompt contains only one execution mode category throughout the entire text, OR multiple modes exist but they belong to the exact same category.
 
 #### Examples
 

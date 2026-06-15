@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba-semantic
+name: goga-tool-scriba-trans-semantic
 description: Goga tool skill — builds a semantic model from the source cell or document by extracting sections, entities, actors, actions, constraints, and workflows without translating content. Invoked from Goga tool as part of the translation pipeline.
 ---
 
@@ -14,7 +14,7 @@ Build semantic model without translating content.
 ## Manifest
 
 ```yaml
-id: goga-tool-scriba-semantic
+id: goga-tool-scriba-trans-semantic
 
 consumes:
   - source.documents

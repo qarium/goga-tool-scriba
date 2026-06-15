@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba-terminology
+name: goga-tool-scriba-trans-terminology
 description: Goga tool skill — builds a canonical glossary by extracting technical terms, entities, and aliases, then creating canonical mappings and validating consistency. Invoked from Goga tool as the first stage of the translation pipeline.
 ---
 
@@ -14,7 +14,7 @@ Build canonical glossary and detect terminology drift.
 ## Manifest
 
 ```yaml
-id: goga-tool-scriba-terminology
+id: goga-tool-scriba-trans-terminology
 
 consumes:
   - source.documents

@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba
+name: goga-tool-scriba-trans
 description: Goga tool skill — orchestrates the complete translation pipeline for cells and documents. Invoked from Goga tool to translate CodeManifests and usage files across languages with terminology analysis, semantic modeling, multi-variant generation, context enrichment, synthesis, and validation.
 ---
 
@@ -27,7 +27,8 @@ Execute the complete translation workflow using a shared `pipeline_context`.
 ```yaml
 execution_policy:
   stop_on_error: true
-  shared_context_required: true
+  max_retries: 2
+  shared_context_required: true # pipeline_context must be passed between all invoked skills
 
 pipeline_context:
     source:
@@ -75,14 +76,14 @@ forbidden_operations:
 ```
 
 ## Workflow
-1. goga-tool-scriba-terminology
-2. goga-tool-scriba-semantic
-3. goga-tool-scriba-generation
-4. goga-tool-scriba-context
-5. goga-tool-scriba-synthesis
-6. goga-tool-scriba-validation
-7. goga-tool-scriba-apply-results
-8. goga-tool-scriba-finalize
+1. goga-tool-scriba-trans-terminology
+2. goga-tool-scriba-trans-semantic
+3. goga-tool-scriba-trans-generation
+4. goga-tool-scriba-trans-context
+5. goga-tool-scriba-trans-synthesis
+6. goga-tool-scriba-trans-validation
+7. goga-tool-scriba-trans-apply-results
+8. goga-tool-scriba-trans-finalize
 
 ## Skill Logic
 Execute skills sequentially and update `pipeline_context` after each successful execution.
@@ -96,10 +97,6 @@ Execute skills sequentially and update `pipeline_context` after each successful 
 - Validation Gate
 - Save Results Gate
 - Finalize Pipeline Gate
-
-## Failure Policy
-stop_on_error: true
-max_retries: 2
 
 ## Output
 status

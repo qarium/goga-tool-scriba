@@ -1,6 +1,6 @@
 ---
 name: goga-tool-scribe-review-fix
-description:
+description: Goga tool skill — review stage that applies approved fixes to documents. Modifies only fragments referenced by findings, preserves original intent and constraints, requires explicit user consent per change, and refuses to inject new requirements. Consumes documents and fix_plan, produces fixed_documents.
 ---
 
 # prompt-engineering-fixer

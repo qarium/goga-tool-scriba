@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba-validation
+name: goga-tool-scriba-trans-validation
 description: Goga tool skill — performs an independent quality audit of the synthesized translation covering structure, semantics, terminology, and AI readability, producing a PASS or FAIL validation report. Invoked from Goga tool as the final stage of the translation pipeline.
 ---
 

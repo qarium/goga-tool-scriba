@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba-finalize
+name: goga-tool-scriba-trans-finalize
 description: Finalize the translation pipeline — run linting across all cells, fix errors, and produce a human-readable report of the entire pipeline output
 ---
 

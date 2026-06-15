@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba-context
+name: goga-tool-scriba-trans-context
 description: Goga tool skill — creates a unified enriched context by merging glossary, semantic model, and translation variants without introducing new information or structural mutations. Invoked from Goga tool as part of the translation pipeline.
 ---
 
@@ -10,7 +10,7 @@ Create unified enriched context.
 
 ## Manifest
 ```yaml
-id: goga-tool-scriba-context
+id: goga-tool-scriba-trans-context
 
 consumes:
   - glossary

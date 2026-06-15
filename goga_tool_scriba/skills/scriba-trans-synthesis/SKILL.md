@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba-synthesis
+name: goga-tool-scriba-trans-synthesis
 description: Goga tool skill — produces the final synthesized translation by selecting the best variant per segment using a semantics-terminology-readability-AI clarity decision matrix. Invoked from Goga tool as part of the translation pipeline.
 ---
 
@@ -10,7 +10,7 @@ Produce final translation.
 
 ## Manifest
 ```yaml
-id: goga-tool-scriba-synthesis
+id: goga-tool-scriba-trans-synthesis
 
 consumes:
   - glossary

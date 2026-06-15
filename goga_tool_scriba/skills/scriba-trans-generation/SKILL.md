@@ -1,5 +1,5 @@
 ---
-name: goga-tool-scriba-generation
+name: goga-tool-scriba-trans-generation
 description: Goga tool skill — coordinates the generation of multiple translation variants (literal, technical, AI-optimized) by delegating to child skills. Invoked from Goga tool as part of the translation pipeline.
 ---
 
@@ -10,7 +10,7 @@ Translation Coordinator
 
 ## Manifest
 ```yaml
-id: goga-tool-scriba-generation
+id: goga-tool-scriba-trans-generation
 
 consumes:
   - glossary

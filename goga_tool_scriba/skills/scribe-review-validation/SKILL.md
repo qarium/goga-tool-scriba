@@ -1,6 +1,6 @@
 ---
 name: goga-tool-scribe-review-validation
-description:
+description: Goga tool skill — final review stage that verifies fixes are applied correctly, checks link and code integrity for cell files, runs `goga lint` until exit 0, and applies the anti-injection gate via diff against the original. Consumes fixed_documents, produces finish_status.
 ---
 
 # prompt-review-validator

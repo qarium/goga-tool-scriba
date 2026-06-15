@@ -1,6 +1,6 @@
 ---
 name: goga-tool-scribe-review
-description:
+description: Goga tool skill — orchestrates the complete prompt-engineering review pipeline for cells and documents. Invoked from Goga tool to validate prompt documents against structure, framing, constraint, entropy, semantic, and efficiency principles; resolves finding conflicts, plans and applies fixes, and validates the result.
 ---
 
 # prompt-engineering-review-orchestrator
@@ -29,13 +29,17 @@ Produce a unified collection of findings.
 
 ## Constraints
 
+### Common processing
+- [SCOPE CONSTRAINT]:
+  - Prioritize defined documents as the primary source of truth; reference source code strictly as a secondary fallback for conflict resolution.
+
 ### Cell processing — Annotations
 - [STRICT PRESERVATION]:
   - Retain all usage links enclosed in backticks (e.g., `usage`).
   - Modifying or removing the backticks or the text inside is strictly prohibited.
 - [SCOPE CONSTRAINT]:
   - Text must be exclusively dedicated to high-level requirements and algorithmic logic.
-  - Technical implementation details are strictly out of scope.
+  - Technical implementation details are **STRICTLY** out of scope.
 - [REVIEW/REFINEMENT RULE]:
   - Content revision and rephrasing during review are permitted, provided the core semantic intent remains strictly confined to requirements and algorithms.
 
@@ -48,9 +52,6 @@ Produce a unified collection of findings.
   - Implementation requirements are strictly out of scope.
 - [REVIEW/REFINEMENT RULE]:
   - Content revision and rephrasing during review are permitted, provided the core semantic intent remains strictly confined to demonstrating usage.
-
-## Fallback
-If the documentation, annotations or usages contains insufficient, ambiguous, or conflicting requirements — fallback to analyzing the source code to resolve the issue.
 
 ## Execution Contract
 ```yaml
@@ -75,23 +76,12 @@ pipeline_context:
 - Assemble findings into a single collection.
 - Produce findings for downstream processing.
 
-## Boundary
-The review workflow is responsible for finding violations.
-
-The review workflow is not responsible for:
-- conflict resolution;
-- recommendation validation;
-- fix planning;
-- document modification.
-
-These responsibilities belong to downstream skills.
-
 ## Workflow
-1. goga-tool-scribe-review-semantic-integrity-check
+1. goga-tool-scribe-review-structure-syntax-check
 2. goga-tool-scribe-review-prompt-framing-check
 3. goga-tool-scribe-review-constraint-engineering-check
 4. goga-tool-scribe-review-entropy-control-check
-5. goga-tool-scribe-review-structure-syntax-check
+5. goga-tool-scribe-review-semantic-integrity-check
 6. goga-tool-scribe-review-efficiency-check
 7. goga-tool-scribe-review-conflict-resolution
 8. goga-tool-scribe-review-planner

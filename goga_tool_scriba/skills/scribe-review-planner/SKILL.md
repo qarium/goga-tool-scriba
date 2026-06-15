@@ -1,6 +1,6 @@
 ---
 name: goga-tool-scribe-review-planner
-description:
+description: Goga tool skill — review stage that builds a safe, executable fix plan from findings. Simulates each recommendation, detects cross-rule interactions, and rejects changes that introduce new violations or new requirements (anti-injection). Consumes documents and findings, produces fix_plan.
 ---
 
 # fix-planner
